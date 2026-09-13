@@ -1,0 +1,67 @@
+task:
+  repeat_count: 1
+  loop_rate_hz: 30.0
+  step_duration_sec: 3.5
+  settle_duration_sec: 0.6
+  log_directory: ~/.ros/mecharm_fixed_pick/logs/fixed_pick
+scene:
+  fixed_frame: base
+  table: {size: [0.60, 0.45, 0.04], pose_xyz: [0.20, 0.00, -0.04]}
+  pick_point_a: {pose_xyz: [0.30, 0.18, 0.031]}
+  place_point_b: {pose_xyz: [0.20, -0.12, 0.02]}
+  safe_height_m: 0.12
+  object: {model_name: target_object, shape: cylinder, radius: 0.018, height: 0.050, placement_tolerance_xy_m: 0.065, placement_max_z_m: 0.090}
+safety:
+  joint_limits:
+    joint1_to_base: [-2.792527, 2.792527]
+    joint2_to_joint1: [-1.308900, 2.094300]
+    joint3_to_joint2: [-3.054300, 1.134400]
+    joint4_to_joint3: [-2.705200, 2.705200]
+    joint5_to_joint4: [-2.007100, 2.007100]
+    joint6_to_joint5: [-4.500000, 3.140000]
+    gripper_controller: [-0.740000, 0.150000]
+robot:
+  joint_names: [joint1_to_base, joint2_to_joint1, joint3_to_joint2, joint4_to_joint3, joint5_to_joint4, joint6_to_joint5]
+  gripper_joint: gripper_controller
+  gripper_open: 0.12
+  gripper_closed: -0.45
+poses:
+  home: {joints: [-0.65555, 0.65595, -1.52463, -0.00710, 1.39166, -0.66122], gripper: 0.12}
+  pick_above: {joints: [0.625777, 1.341368, -1.400850, -0.209502, 1.344684, -2.498138], gripper: 0.12}
+  pick_down: {joints: [0.625784, 1.317287, -1.262516, -0.216508, 1.233009, -2.472998], gripper: 0.12}
+  place_above: {joints: [-0.625568, 1.473372, -1.651131, 0.205302, 1.460390, -3.760152], gripper: -0.45}
+  place_down: {joints: [-0.625568, 1.473372, -1.651131, 0.205302, 1.460390, -3.760152], gripper: -0.45}
+  carry_01: {joints: [0.542037, 1.741987, -2.188472, -0.181219, 1.708986, -2.652541], gripper: -0.45}
+  carry_02: {joints: [0.448941, 1.857206, -2.425366, -0.155409, 1.815302, -2.754995], gripper: -0.45}
+  carry_03: {joints: [0.346707, 1.931491, -2.581445, -0.123935, 1.884599, -2.853202], gripper: -0.45}
+  carry_04: {joints: [0.236356, 1.979779, -2.684572, -0.086661, 1.930069, -2.949884], gripper: -0.45}
+  carry_05: {joints: [0.119846, 2.007350, -2.744021, -0.044659, 1.956114, -3.045881], gripper: -0.45}
+  carry_06: {joints: [0.000000, 2.016355, -2.763273, 0.000001, 1.964378, -3.141593], gripper: -0.45}
+  carry_07: {joints: [-0.119835, 2.007393, -2.743254, 0.044641, 1.955304, -3.237334], gripper: -0.45}
+  carry_08: {joints: [-0.236313, 1.979866, -2.683092, 0.086596, 1.928506, -3.333411], gripper: -0.45}
+  carry_09: {joints: [-0.346621, 1.931622, -2.579352, 0.123818, 1.882384, -3.430200], gripper: -0.45}
+  carry_10: {joints: [-0.448811, 1.857388, -2.422794, 0.155262, 1.812564, -3.528518], gripper: -0.45}
+  carry_11: {joints: [-0.541868, 1.742257, -2.185609, 0.181090, 1.705878, -3.631063], gripper: -0.45}
+  carry_12: {joints: [-0.625568, 1.473372, -1.651131, 0.205302, 1.460390, -3.760152], gripper: -0.45}
+sequence:
+  - {name: home, pose: home, phase: idle}
+  - {name: move_above_pick, pose: pick_above, phase: approach_pick}
+  - {name: descend_to_pick, pose: pick_down, phase: at_pick}
+  - {name: close_gripper, pose: pick_down, gripper: closed, phase: grasped, settle_duration_sec: 1.0}
+  - {name: lift_object, pose: pick_above, gripper: closed, phase: carried}
+  - {name: carry_01, pose: carry_01, gripper: closed, phase: carried}
+  - {name: carry_02, pose: carry_02, gripper: closed, phase: carried}
+  - {name: carry_03, pose: carry_03, gripper: closed, phase: carried}
+  - {name: carry_04, pose: carry_04, gripper: closed, phase: carried}
+  - {name: carry_05, pose: carry_05, gripper: closed, phase: carried}
+  - {name: carry_06, pose: carry_06, gripper: closed, phase: carried}
+  - {name: carry_07, pose: carry_07, gripper: closed, phase: carried}
+  - {name: carry_08, pose: carry_08, gripper: closed, phase: carried}
+  - {name: carry_09, pose: carry_09, gripper: closed, phase: carried}
+  - {name: carry_10, pose: carry_10, gripper: closed, phase: carried}
+  - {name: carry_11, pose: carry_11, gripper: closed, phase: carried}
+  - {name: carry_12, pose: carry_12, gripper: closed, phase: carried}
+  - {name: descend_to_place, pose: place_down, gripper: closed, phase: carried, settle_duration_sec: 1.0}
+  - {name: open_gripper, pose: place_down, gripper: open, phase: placed, settle_duration_sec: 1.0}
+  - {name: lift_clear, pose: place_above, gripper: open, phase: placed}
+  - {name: return_home, pose: home, gripper: open, phase: complete}

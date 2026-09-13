@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<robot name="mecharm_270_full_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="controllers_file" default="$(find mecharm_fixed_pick_sim)/config/full_model_controllers.yaml"/>
+
+  <xacro:macro name="box_inertial" params="mass x y z">
+    <inertial>
+      <mass value="${mass}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${mass * (y*y + z*z) / 12.0}" ixy="0" ixz="0"
+               iyy="${mass * (x*x + z*z) / 12.0}" iyz="0"
+               izz="${mass * (x*x + y*y) / 12.0}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="mesh_link" params="name mesh visual_xyz visual_rpy sx sy sz mass collision_xyz:='0 0 0'">
+    <link name="${name}">
+      <xacro:box_inertial mass="${mass}" x="${sx}" y="${sy}" z="${sz}"/>
+      <visual>
+        <origin xyz="${visual_xyz}" rpy="${visual_rpy}"/>
+        <geometry><mesh filename="${mesh}"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="${collision_xyz}" rpy="0 0 0"/>
+        <geometry><box size="${sx} ${sy} ${sz}"/></geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="mesh_visual_link" params="name mesh visual_xyz visual_rpy sx sy sz mass">
+    <link name="${name}">
+      <xacro:box_inertial mass="${mass}" x="${sx}" y="${sy}" z="${sz}"/>
+      <visual>
+        <origin xyz="${visual_xyz}" rpy="${visual_rpy}"/>
+        <geometry><mesh filename="${mesh}"/></geometry>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <link name="world"/>
+  <link name="base">
+    <xacro:box_inertial mass="1.2" x="0.12" y="0.12" z="0.08"/>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 -3.1415926"/>
+      <geometry><mesh filename="package://mycobot_description/urdf/mecharm_270_m5/base.dae"/></geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.06" length="0.08"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="world_to_base" type="fixed">
+    <parent link="world"/><child link="base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:mesh_link name="link1" mesh="package://mycobot_description/urdf/mecharm_270_m5/link1.dae"
+    visual_xyz="0 0 -0.112" visual_rpy="0 0 0" sx="0.06" sy="0.06" sz="0.10" mass="0.45" collision_xyz="0 0 0.05"/>
+  <xacro:mesh_link name="link2" mesh="package://mycobot_description/urdf/mecharm_270_m5/link2.dae"
+    visual_xyz="-0.005 0.252 0.002" visual_rpy="-1.570793 0 3.141593" sx="0.04" sy="0.16" sz="0.04" mass="0.35" collision_xyz="0 -0.08 0"/>
+  <xacro:mesh_link name="link3" mesh="package://mycobot_description/urdf/mecharm_270_m5/link3.dae"
+    visual_xyz="-0.09 0.408 0.005" visual_rpy="-1.570793 0 -3.141593" sx="0.13" sy="0.04" sz="0.04" mass="0.30" collision_xyz="0.065 0 0"/>
+  <xacro:mesh_link name="link4" mesh="package://mycobot_description/urdf/mecharm_270_m5/link4.dae"
+    visual_xyz="0.010 -0.214 -0.250" visual_rpy="-3.141593 1.570793 -1.570793" sx="0.11" sy="0.035" sz="0.035" mass="0.24" collision_xyz="0.055 0 0"/>
+  <xacro:mesh_link name="link5" mesh="package://mycobot_description/urdf/mecharm_270_m5/link5.dae"
+    visual_xyz="-0.314 -0.221 0.103" visual_rpy="1.570800 0 3.141593" sx="0.09" sy="0.03" sz="0.03" mass="0.18" collision_xyz="0.045 0 0"/>
+  <xacro:mesh_link name="link6" mesh="package://mycobot_description/urdf/mecharm_270_m5/link6.dae"
+    visual_xyz="-0.2745 0.1506 -0.263" visual_rpy="3.141593 1.570793 3.141593" sx="0.06" sy="0.03" sz="0.03" mass="0.12" collision_xyz="0.03 0 0"/>
+
+  <xacro:mesh_visual_link name="gripper_base" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_base.dae"
+    visual_xyz="0 0 -0.012" visual_rpy="0 0 0" sx="0.08" sy="0.08" sz="0.035" mass="0.08"/>
+  <xacro:mesh_visual_link name="gripper_left1" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_left1.dae"
+    visual_xyz="-0.131000 0.087936 -0.006202" visual_rpy="1.579000 0 0" sx="0.055" sy="0.018" sz="0.018" mass="0.04"/>
+  <xacro:mesh_visual_link name="gripper_left2" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_left2.dae"
+    visual_xyz="-0.165000 0.081938 -0.006402" visual_rpy="1.579000 0 0" sx="0.045" sy="0.018" sz="0.018" mass="0.04"/>
+  <xacro:mesh_visual_link name="gripper_left3" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_left3.dae"
+    visual_xyz="-0.158000 0.103938 -0.006402" visual_rpy="1.579000 0 0" sx="0.035" sy="0.018" sz="0.018" mass="0.04"/>
+  <xacro:mesh_visual_link name="gripper_right1" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_right1.dae"
+    visual_xyz="-0.209000 0.087936 -0.006202" visual_rpy="1.579000 0 0" sx="0.055" sy="0.018" sz="0.018" mass="0.04"/>
+  <xacro:mesh_visual_link name="gripper_right2" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_right2.dae"
+    visual_xyz="-0.175000 0.081938 -0.006402" visual_rpy="1.579000 0 0" sx="0.045" sy="0.018" sz="0.018" mass="0.04"/>
+  <xacro:mesh_visual_link name="gripper_right3" mesh="package://mycobot_description/urdf/adaptive_gripper/gripper_right3.dae"
+    visual_xyz="-0.182000 0.103938 -0.006402" visual_rpy="1.579000 0 0" sx="0.035" sy="0.018" sz="0.018" mass="0.04"/>
+
+  <joint name="joint1_to_base" type="revolute"><parent link="base"/><child link="link1"/><origin xyz="0 0 0.08" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="8" lower="-2.792527" upper="2.792527" velocity="1"/><dynamics damping="0.4" friction="0.05"/></joint>
+  <joint name="joint2_to_joint1" type="revolute"><parent link="link1"/><child link="link2"/><origin xyz="0 0 0.10" rpy="-1.5708 0 0"/><axis xyz="0 0 1"/><limit effort="8" lower="-1.3089" upper="2.0943" velocity="1"/><dynamics damping="0.4" friction="0.05"/></joint>
+  <joint name="joint3_to_joint2" type="revolute"><parent link="link2"/><child link="link3"/><origin xyz="0 -0.16 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="8" lower="-3.0543" upper="1.1344" velocity="1"/><dynamics damping="0.4" friction="0.05"/></joint>
+  <joint name="joint4_to_joint3" type="revolute"><parent link="link3"/><child link="link4"/><origin xyz="0.13 0 0" rpy="0 1.5708 0"/><axis xyz="0 0 1"/><limit effort="5" lower="-2.7052" upper="2.7052" velocity="1.2"/><dynamics damping="0.25" friction="0.04"/></joint>
+  <joint name="joint5_to_joint4" type="revolute"><parent link="link4"/><child link="link5"/><origin xyz="0.11 0 0" rpy="0 -1.5708 0"/><axis xyz="0 0 1"/><limit effort="5" lower="-2.0071" upper="2.0071" velocity="1.2"/><dynamics damping="0.25" friction="0.04"/></joint>
+  <joint name="joint6_to_joint5" type="revolute"><parent link="link5"/><child link="link6"/><origin xyz="0.09 0 0" rpy="0 1.5708 0"/><axis xyz="0 0 1"/><limit effort="4" lower="-3.14" upper="3.14" velocity="1.5"/><dynamics damping="0.2" friction="0.03"/></joint>
+  <joint name="joint6output_to_gripper_base" type="fixed"><parent link="link6"/><child link="gripper_base"/><origin xyz="0.06 0 0" rpy="0 0 0"/></joint>
+  <gazebo reference="joint6output_to_gripper_base"><preserveFixedJoint>true</preserveFixedJoint></gazebo>
+
+  <joint name="gripper_controller" type="revolute"><parent link="gripper_base"/><child link="gripper_left3"/><origin xyz="-0.012 0.005 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.74" upper="0.15" velocity="2"/><dynamics damping="0.1" friction="0.02"/></joint>
+  <joint name="gripper_base_to_gripper_left2" type="revolute"><parent link="gripper_base"/><child link="gripper_left2"/><origin xyz="-0.005 0.027 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.8" upper="0.5" velocity="2"/><mimic joint="gripper_controller" multiplier="1" offset="0"/></joint>
+  <joint name="gripper_left3_to_gripper_left1" type="revolute"><parent link="gripper_left3"/><child link="gripper_left1"/><origin xyz="-0.027 0.016 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.5" upper="0.5" velocity="2"/><mimic joint="gripper_controller" multiplier="-1" offset="0"/></joint>
+  <joint name="gripper_base_to_gripper_right3" type="revolute"><parent link="gripper_base"/><child link="gripper_right3"/><origin xyz="0.012 0.005 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.15" upper="0.7" velocity="2"/><mimic joint="gripper_controller" multiplier="-1" offset="0"/></joint>
+  <joint name="gripper_base_to_gripper_right2" type="revolute"><parent link="gripper_base"/><child link="gripper_right2"/><origin xyz="0.005 0.027 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.5" upper="0.8" velocity="2"/><mimic joint="gripper_controller" multiplier="-1" offset="0"/></joint>
+  <joint name="gripper_right3_to_gripper_right1" type="revolute"><parent link="gripper_right3"/><child link="gripper_right1"/><origin xyz="0.027 0.016 0" rpy="0 0 0"/><axis xyz="0 0 1"/><limit effort="2" lower="-0.5" upper="0.5" velocity="2"/><mimic joint="gripper_controller" multiplier="1" offset="0"/></joint>
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware><plugin>gazebo_ros2_control/GazeboSystem</plugin></hardware>
+    <joint name="joint1_to_base"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint2_to_joint1"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint3_to_joint2"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint4_to_joint3"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint5_to_joint4"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="joint6_to_joint5"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="gripper_controller"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <!-- Mimic joints must be registered with gazebo_ros2_control as state-only
+         joints; the mimic parameters make Gazebo apply the URDF multipliers. -->
+    <joint name="gripper_base_to_gripper_left2">
+      <param name="mimic">gripper_controller</param><param name="multiplier">1</param>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+    <joint name="gripper_left3_to_gripper_left1">
+      <param name="mimic">gripper_controller</param><param name="multiplier">-1</param>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+    <joint name="gripper_base_to_gripper_right3">
+      <param name="mimic">gripper_controller</param><param name="multiplier">-1</param>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+    <joint name="gripper_base_to_gripper_right2">
+      <param name="mimic">gripper_controller</param><param name="multiplier">-1</param>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+    <joint name="gripper_right3_to_gripper_right1">
+      <param name="mimic">gripper_controller</param><param name="multiplier">1</param>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+  <gazebo><plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control"><parameters>$(arg controllers_file)</parameters></plugin></gazebo>
+  <gazebo>
+    <plugin name="physical_grasp" filename="libgazebo_ros_vacuum_gripper.so">
+      <ros>
+        <namespace>/mecharm_grasp</namespace>
+        <remapping>switch:=switch</remapping>
+        <remapping>grasping:=grasping</remapping>
+      </ros>
+      <link_name>gripper_base</link_name>
+      <max_distance>0.16</max_distance>
+      <fixed>ground_plane</fixed>
+      <fixed>work_table</fixed>
+      <fixed>place_area</fixed>
+    </plugin>
+  </gazebo>
+</robot>

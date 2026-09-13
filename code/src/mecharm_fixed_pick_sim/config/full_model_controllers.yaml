@@ -1,0 +1,27 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+    full_arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    full_gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+full_arm_controller:
+  ros__parameters:
+    joints: [joint1_to_base, joint2_to_joint1, joint3_to_joint2, joint4_to_joint3, joint5_to_joint4, joint6_to_joint5]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: false
+    open_loop_control: true
+    interpolation_method: splines
+
+full_gripper_controller:
+  ros__parameters:
+    joints: [gripper_controller]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: false
+    open_loop_control: true
+    interpolation_method: splines
