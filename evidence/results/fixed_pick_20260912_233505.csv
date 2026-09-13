@@ -1,0 +1,117 @@
+wall_time,repeat,step,phase,status,joint_positions_rad,message
+2026-09-12 23:35:07,1,reset_object,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",object reset to pick point A
+2026-09-12 23:35:07,1,initial,idle,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:09,1,initial,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:10,1,above_a,approach_pick,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:11,1,above_a,approach_pick,complete,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:11,1,crab,at_pick,start,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:12,1,crab,at_pick,complete,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:12,1,pick,grasped,start,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:13,1,pick,grasped,complete,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:13,1,pick,grasped,grasp_attached,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",visual attachment to gripper_base
+2026-09-12 23:35:14,1,lift,carried,start,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:15,1,lift,carried,complete,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:15,1,initial_2,carried,start,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:17,1,initial_2,carried,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:18,1,release_ready,carried,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:20,1,release_ready,carried,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:20,1,release,placed,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:22,1,release,placed,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:35:22,1,release,placed,released,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]","visual attachment released at x=0.2462, y=-0.1241, above B at z=0.0400 m"
+2026-09-12 23:35:23,1,release,placed,release_settled,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",object fixed directly below release position at z=0.0200 m
+2026-09-12 23:35:23,1,initial,complete,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:35:25,1,initial,complete,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:25,1,initial,complete,cycle_passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","object xyz=(0.2462, -0.1241, 0.0200), xy_error=0.0001"
+2026-09-12 23:35:25,2,reset_object,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",object reset to pick point A
+2026-09-12 23:35:26,2,initial,idle,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:28,2,initial,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:28,2,above_a,approach_pick,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:29,2,above_a,approach_pick,complete,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:29,2,crab,at_pick,start,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:30,2,crab,at_pick,complete,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:31,2,pick,grasped,start,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:32,2,pick,grasped,complete,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:32,2,pick,grasped,grasp_attached,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",visual attachment to gripper_base
+2026-09-12 23:35:32,2,lift,carried,start,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:33,2,lift,carried,complete,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:34,2,initial_2,carried,start,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:36,2,initial_2,carried,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:36,2,release_ready,carried,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:38,2,release_ready,carried,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:39,2,release,placed,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:41,2,release,placed,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:35:41,2,release,placed,released,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]","visual attachment released at x=0.2461, y=-0.1240, above B at z=0.0400 m"
+2026-09-12 23:35:41,2,release,placed,release_settled,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",object fixed directly below release position at z=0.0200 m
+2026-09-12 23:35:41,2,initial,complete,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:35:43,2,initial,complete,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:43,2,initial,complete,cycle_passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","object xyz=(0.2461, -0.1240, 0.0200), xy_error=0.0003"
+2026-09-12 23:35:43,3,reset_object,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",object reset to pick point A
+2026-09-12 23:35:44,3,initial,idle,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:46,3,initial,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:46,3,above_a,approach_pick,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:47,3,above_a,approach_pick,complete,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:48,3,crab,at_pick,start,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:49,3,crab,at_pick,complete,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:49,3,pick,grasped,start,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:35:50,3,pick,grasped,complete,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:50,3,pick,grasped,grasp_attached,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",visual attachment to gripper_base
+2026-09-12 23:35:51,3,lift,carried,start,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:35:52,3,lift,carried,complete,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:52,3,initial_2,carried,start,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:54,3,initial_2,carried,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:54,3,release_ready,carried,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:35:56,3,release_ready,carried,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:57,3,release,placed,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:35:59,3,release,placed,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:35:59,3,release,placed,released,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]","visual attachment released at x=0.2459, y=-0.1239, above B at z=0.0400 m"
+2026-09-12 23:35:59,3,release,placed,release_settled,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",object fixed directly below release position at z=0.0200 m
+2026-09-12 23:35:59,3,initial,complete,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:36:01,3,initial,complete,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:02,3,initial,complete,cycle_passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","object xyz=(0.2459, -0.1239, 0.0200), xy_error=0.0005"
+2026-09-12 23:36:02,4,reset_object,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",object reset to pick point A
+2026-09-12 23:36:02,4,initial,idle,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:04,4,initial,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:05,4,above_a,approach_pick,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:06,4,above_a,approach_pick,complete,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:06,4,crab,at_pick,start,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:07,4,crab,at_pick,complete,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:07,4,pick,grasped,start,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:09,4,pick,grasped,complete,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:36:09,4,pick,grasped,grasp_attached,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",visual attachment to gripper_base
+2026-09-12 23:36:09,4,lift,carried,start,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:36:10,4,lift,carried,complete,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:10,4,initial_2,carried,start,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:12,4,initial_2,carried,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:13,4,release_ready,carried,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:15,4,release_ready,carried,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:36:15,4,release,placed,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:36:17,4,release,placed,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:36:17,4,release,placed,released,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]","visual attachment released at x=0.2466, y=-0.1242, above B at z=0.0400 m"
+2026-09-12 23:36:18,4,release,placed,release_settled,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",object fixed directly below release position at z=0.0200 m
+2026-09-12 23:36:18,4,initial,complete,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:36:20,4,initial,complete,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:20,4,initial,complete,cycle_passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","object xyz=(0.2466, -0.1242, 0.0200), xy_error=0.0003"
+2026-09-12 23:36:20,5,reset_object,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",object reset to pick point A
+2026-09-12 23:36:21,5,initial,idle,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:23,5,initial,idle,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:23,5,above_a,approach_pick,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:24,5,above_a,approach_pick,complete,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:24,5,crab,at_pick,start,"[0.52, 0.63, -0.58, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:25,5,crab,at_pick,complete,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:26,5,pick,grasped,start,"[0.53, 1.65, -1.31, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:27,5,pick,grasped,complete,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:36:27,5,pick,grasped,grasp_attached,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",visual attachment to gripper_base
+2026-09-12 23:36:27,5,lift,carried,start,"[0.53, 1.86, -1.22, 0.0, -0.53, 0.0, -0.14]",
+2026-09-12 23:36:28,5,lift,carried,complete,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:29,5,initial_2,carried,start,"[0.53, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:31,5,initial_2,carried,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:31,5,release_ready,carried,start,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.14]",
+2026-09-12 23:36:33,5,release_ready,carried,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:36:34,5,release,placed,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, -0.14]",
+2026-09-12 23:36:36,5,release,placed,complete,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:36:36,5,release,placed,released,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]","visual attachment released at x=0.2459, y=-0.1239, above B at z=0.0400 m"
+2026-09-12 23:36:36,5,release,placed,release_settled,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",object fixed directly below release position at z=0.0200 m
+2026-09-12 23:36:36,5,initial,complete,start,"[-0.48, 1.17, 0.27, 0.0, -1.37, 0.0, 0.12]",
+2026-09-12 23:36:38,5,initial,complete,complete,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]",
+2026-09-12 23:36:38,5,initial,complete,cycle_passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","object xyz=(0.2459, -0.1239, 0.0200), xy_error=0.0005"
+2026-09-12 23:36:38,6,initial,complete,passed,"[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.12]","{""status"": ""passed"", ""success_count"": 5, ""repeat_count"": 5, ""success_rule"": ""at least 4 successful runs out of 5"", ""failure_reason"": """"}"
