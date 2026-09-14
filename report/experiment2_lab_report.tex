@@ -51,33 +51,37 @@
 \begin{titlepage}
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
-\fill[Navy] (current page.north west) rectangle ([yshift=-34mm]current page.north east);
-\fill[Teal] ([yshift=-34mm]current page.north west) rectangle ([yshift=-37mm]current page.north east);
+\fill[Navy] (current page.north west) rectangle ([yshift=-27mm]current page.north east);
+\fill[Teal] ([yshift=-27mm]current page.north west) rectangle ([yshift=-30mm]current page.north east);
+\fill[Sky] ([xshift=-24mm]current page.north east) rectangle ([xshift=-15mm,yshift=-30mm]current page.north east);
+\node[anchor=north west,xshift=22mm,yshift=-10mm,color=white,font=\sffamily\bfseries\small] at (current page.north west) {ROBOTICS INTEGRATION GROUP PROJECT};
+\node[anchor=north east,xshift=-30mm,yshift=-10mm,color=white,font=\sffamily\small] at (current page.north east) {GROUP 17};
 \end{tikzpicture}
-\vspace*{12mm}
-\begin{flushright}\color{white}\small Robotics Integration Group Project\end{flushright}
-\vspace{18mm}
+\vspace*{13mm}
 \begin{center}
-{\color{Navy}\fontsize{25}{30}\selectfont\bfseries Experiment 2\\[2mm]}
-{\color{Blue}\fontsize{19}{24}\selectfont Fixed-point Pick-and-place with a mechArm 270}\par
-\vspace{11mm}
-\rule{0.72\textwidth}{1pt}\par\vspace{5mm}
-{\large Laboratory Report}\par\vspace{8mm}
-\begin{tabular}{>{\bfseries\color{Navy}}p{0.23\textwidth}p{0.58\textwidth}}
+{\color{Teal}\sffamily\bfseries\small EXPERIMENT REPORT SERIES \textbar\ ROS 2 + GAZEBO}\par
+\vspace{9mm}
+{\color{Navy}\fontsize{29}{34}\selectfont\sffamily\bfseries Experiment 2}\par
+\vspace{3mm}
+{\color{Blue}\fontsize{18}{23}\selectfont\sffamily Fixed-point Pick-and-place with a mechArm 270}\par
+\vspace{6mm}
+{\color{Teal}\rule{0.16\textwidth}{2pt}\hspace{5pt}\rule{0.52\textwidth}{0.6pt}\hspace{5pt}\rule{0.16\textwidth}{2pt}}\par
+\vspace{5mm}
+{\color{Ink}\large\sffamily Laboratory Report}\par
+\vspace{8mm}
+\colorbox{Sky}{\parbox{0.84\textwidth}{\vspace{4mm}
+\begin{tabular}{>{\bfseries\color{Navy}\sffamily}p{0.24\textwidth}p{0.58\textwidth}}
 Course & Robotics Integration Group Project I\\
 Group & Group 17\\
 Members & Yang Muqing; Lan Songyu; Zhang Kairui; Zhao Hang\\
 Platform & ROS 2 Humble + Gazebo + mechArm 270\\
 Evidence version & experiment2\_submission\_final\_20260913\_v2\\
-Repository & \url{https://github.com/9161942-boop/robotics-experiment-2}
-\end{tabular}
+Repository & \url{github.com/9161942-boop/robotics-experiment-2}
+\end{tabular}\vspace{4mm}}}\par
 \vfill
-\begin{minipage}{0.78\textwidth}
-\small\color{Ink}
-This report documents a fixed-point manipulation experiment. The target is placed at a known point A, grasped with a parallel gripper, carried above a safe height, and released at point B. The report separates the control principle, the ROS 2 implementation, the verified simulation results, and the evidence available for the real-machine demonstration.
-\end{minipage}
+\colorbox{SoftGray}{\parbox{0.78\textwidth}{\small\color{Ink}\textbf{Scope.} This report documents a fixed-point manipulation experiment: the arm approaches a known pick point A, grasps a target cylinder, carries it above a safe height, releases it at point B, and returns home. It records the control principle, ROS 2 implementation, simulation verification and real-machine demonstration evidence.}}\par
 \vfill
-{\color{Navy}\large September 2026}\par
+{\color{Navy}\sffamily\bfseries September 2026}\par
 \end{center}
 \end{titlepage}
 
@@ -360,3 +364,4 @@ Commit & Content\\
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
 \end{document}
+
