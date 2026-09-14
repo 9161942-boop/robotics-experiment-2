@@ -135,6 +135,20 @@ The experiment follows the sequence shown in Fig.~\ref{fig:workflow}. The source
 \label{fig:workflow}
 \end{figure}
 
+\subsection{Complete desktop-classification workflow}
+The course-project presentation describes the complete desktop-sorting task as a closed loop from perception to placement. Its implementation can be organized into the following stages:
+\begin{enumerate}[leftmargin=1.8em,itemsep=0.15em,topsep=0.2em]
+\item \textbf{Image acquisition.} A fixed overhead camera observes the tabletop and the six-grid working area.
+\item \textbf{Object detection.} The detector returns a class label, bounding box and confidence for each visible object.
+\item \textbf{Grid mapping.} The bounding-box centre is mapped to a grid identifier such as \code{G1--G6}; empty cells remain available for the next cycle.
+\item \textbf{Category decision.} The class identifier selects the corresponding classification area and the pre-calibrated placement point.
+\item \textbf{Task dispatch.} The controller queries the safe, pick and place poses associated with the grid and category instead of generating an arbitrary grasp online.
+\item \textbf{Arm execution.} The motion sequence is \code{SAFE -> PICK -> GRIP -> SAFE -> BOX\_SAFE -> PLACE -> RELEASE -> HOME}, with a final pose check after release.
+\item \textbf{Loop management.} After a successful placement, the controller marks the target as processed and returns to perception until all objects have been handled.
+\item \textbf{Exception handling.} Empty cells are skipped, low-confidence detections are logged as \code{UNKNOWN}, a failed grasp returns the arm to a safe pose, and a communication fault stops continuous motion.
+\end{enumerate}
+The present Experiment 2 validates the execution layer of this architecture. The fixed pick point A represents a selected grid cell, and the fixed place point B represents one destination. The ROS 2 state machine, safe-height motion, gripper control, release operation and final-pose verification are therefore directly reusable when the multi-grid and multi-category perception layer from the presentation is connected later. This scope distinction keeps the report faithful to the supplied five-cycle fixed-point logs and the two demonstration videos.
+
 \section{Control Principle}
 \subsection{Joint-space trajectory generation}
 The final configuration uses a set of manually selected joint vectors. For two consecutive waypoints $\mathbf q_0$ and $\mathbf q_1$, the task node uses a cosine interpolation parameter
