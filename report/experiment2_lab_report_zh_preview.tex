@@ -121,6 +121,7 @@ ros2 launch mecharm_fixed_pick_sim fixed_point_experiment.launch.py \\
 \item \textbf{自动回放并完成验收。}自动任务节点读取\code{fixed\_point\_experiment.yaml}，按\code{initial} $\rightarrow$ \code{above\_a} $\rightarrow$ \code{crab} $\rightarrow$ \code{pick} $\rightarrow$ \code{lift} $\rightarrow$ \code{initial\_2} $\rightarrow$ \code{release\_ready} $\rightarrow$ \code{release} $\rightarrow$ \code{initial}运行。航点之间采用余弦插值，指令频率为 30 Hz；程序连续执行五个周期，读取目标最终 X/Y/Z，计算 XY 误差和高度，并检查关节限位、服务响应和状态转移。周期号、阶段、关节位置、夹爪动作和检查结果写入 CSV，终端输出完成摘要，最终归档两份五周期 CSV、错误日志、校验和、终端摘要和仿真视频。
 \end{enumerate}
 \begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{real_sequence.jpg}\par\vspace{2mm}
 \begin{tikzpicture}[node distance=0.35cm,every node/.style={font=\small},s/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center},t/.style={s,draw=Teal,fill=Teal!12},a/.style={-Latex,draw=Teal,line width=0.8pt}]
 \node[s](s1){手动控制台 / JSON\\示教记录};\node[s,right=of s1](s2){固化最终参数\\fixed\_point\_experiment.yaml};\node[s,right=of s2](s3){自动任务节点\\读取 YAML 序列};\node[t,right=of s3](s4){CSV、日志、视频\\与摘要};
 \draw[a](s1)--(s2)--(s3)--(s4);
@@ -143,11 +144,12 @@ ros2 launch mecharm_fixed_pick_sim fixed_point_experiment.launch.py \\
 \item \textbf{记录现场证据与异常处理。}演示过程中持续观察夹持稳定性、桌面擦碰、放置偏差和串口状态；出现通信异常、目标滑落或姿态异常时，停止连续运动并回到安全姿态。最终 MP4 记录接近、夹持、抬升、搬运、释放和复位画面，仿真 CSV 提供五周期数值结果，二者共同记录控制逻辑从 Gazebo 到实体平台的迁移。
 \end{enumerate}
 \begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{real_sequence.jpg}\par\vspace{2mm}
 \begin{tikzpicture}[node distance=0.33cm,every node/.style={font=\small},s/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.25cm,minimum height=0.62cm,align=center},t/.style={s,draw=Teal,fill=Teal!12},a/.style={-Latex,draw=Teal,line width=0.8pt}]
 \node[s](r1){串口连接\\状态检查};\node[s,right=of r1](r2){HOME\\夹爪打开};\node[s,right=of r2](r3){A 点\\PICK / GRIP};\node[t,right=of r3](r4){SAFE\\搬运至 B};\node[t,right=of r4](r5){PLACE / RELEASE\\返回 HOME};
 \draw[a](r1)--(r2)--(r3)--(r4)--(r5);
 \end{tikzpicture}
-\caption{实机阶段从设备准备到抓取、搬运、释放和复位的动作链。}\label{fig:realflowzh}
+\caption{实机代表性画面与设备准备、抓取、搬运、释放和复位动作链。}\label{fig:realflowzh}
 \end{figure}
 
 \section{验证结果}
@@ -162,7 +164,7 @@ v2 材料中的两份 CSV 经过 SHA-256 校验且彼此独立。每份包含 11
 \subsection{仿真视频}
 图~\ref{fig:simvideozh}从\code{simulation\_demo.webm}中选取三帧：第一帧显示机械臂接近工作区域，中间帧显示夹爪携带红色圆柱，最后一帧显示释放后机械臂回到场景初始侧。原始 WebM 随提交包归档。\begin{figure}[H]\centering\includegraphics[width=\textwidth]{sim_sequence.jpg}\caption{仿真演示视频中的代表性画面。}\label{fig:simvideozh}\end{figure}
 \subsection{实机视频}
-图~\ref{fig:realvideozh}概括了提供的竖屏 MP4，画面展示实体机械臂、夹爪、桌面和目标区域，记录了动作迁移到硬件后的运行过程。五周期数值结果见仿真 CSV 记录。\begin{figure}[H]\centering\includegraphics[width=\textwidth]{real_sequence.jpg}\caption{实机演示视频中的代表性画面。}\label{fig:realvideozh}\end{figure}
+图~\ref{fig:realflowzh} 将实机代表性画面与动作链并列呈现。提供的竖屏 MP4 记录实体机械臂接近、夹持、抬升、搬运、释放和复位过程；五周期数值结果仍由仿真 CSV 记录支撑。
 
 \section{讨论与总结}
 \subsection{实验完成的内容}
@@ -183,6 +185,10 @@ v2 材料中的两份 CSV 经过 SHA-256 校验且彼此独立。每份包含 11
 \begin{figure}[H]\centering\includegraphics[width=0.36\textwidth]{github_commit_history_exp2.png}\caption{公开实验二仓库的 GitHub 提交历史。}\label{fig:github-history-zh}\end{figure}
 \section*{证据范围说明}\addcontentsline{toc}{section}{证据范围说明}本报告中的仿真结果引用 final v2 压缩包及其中的 CSV、验证记录，编写报告阶段未重新运行仿真。两段视频为用户提供的演示文件，报告依据视频画面说明仿真和实机动作过程。五周期仿真次数由 CSV 支持，实机部分围绕 MP4 中呈现的实体操作展开。
 \end{document}
+
+
+
+
 
 
 

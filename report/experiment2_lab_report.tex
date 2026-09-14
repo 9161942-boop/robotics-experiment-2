@@ -220,6 +220,7 @@ The simulation followed seven explicit steps: manual teaching and point adjustme
 \item \textbf{Replay the configured sequence and check acceptance.} The automatic task node loaded \code{fixed\_point\_experiment.yaml} and executed \code{initial} $\rightarrow$ \code{above\_a} $\rightarrow$ \code{crab} $\rightarrow$ \code{pick} $\rightarrow$ \code{lift} $\rightarrow$ \code{initial\_2} $\rightarrow$ \code{release\_ready} $\rightarrow$ \code{release} $\rightarrow$ \code{initial}. Cosine interpolation generated 30~Hz joint commands. The program completed five cycles, checked the final X/Y/Z, XY error, height, joint limits, service responses and state transitions, and wrote the cycle number, phase, joint positions, gripper actions and checks to CSV. The terminal summary, two five-cycle CSV files, error log, checksums and simulation video were archived together.
 \end{enumerate}
 \begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{real_sequence.jpg}\par\vspace{2mm}
 \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\small}, box/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center}, box2/.style={box,draw=Teal,fill=Teal!12}, arr/.style={-Latex,draw=Teal,line width=0.8pt}]
 \node[box] (s1) {Manual control panel / JSON\\teaching record};\node[box,right=of s1] (s2) {Fix final parameters\\fixed\_point\_experiment.yaml};\node[box,right=of s2] (s3) {Automatic task node\\read YAML sequence};\node[box2,right=of s3] (s4) {CSV, logs, video\\and summary};\draw[arr] (s1)--(s2)--(s3)--(s4);
 \end{tikzpicture}
@@ -242,10 +243,11 @@ The real-machine demonstration followed six steps that corresponded to the simul
 \item \textbf{Record evidence and handle abnormal states.} The demonstration was observed for grip stability, table contact, placement offset and serial status. A communication fault, target slip or abnormal posture triggered a stop of continuous motion and a return to the safe posture. The supplied MP4 records approach, grasp, lift, transfer, release and reset; the simulation CSV supplies the five-cycle numerical result.
 \end{enumerate}
 \begin{figure}[H]\centering
+\includegraphics[width=0.82\textwidth]{real_sequence.jpg}\par\vspace{2mm}
 \begin{tikzpicture}[node distance=0.33cm, every node/.style={font=\small}, box/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.25cm,minimum height=0.62cm,align=center}, box2/.style={box,draw=Teal,fill=Teal!12}, arr/.style={-Latex,draw=Teal,line width=0.8pt}]
 \node[box] (r1) {Serial link\\status check};\node[box,right=of r1] (r2) {HOME\\gripper open};\node[box,right=of r2] (r3) {A point\\PICK / GRIP};\node[box2,right=of r3] (r4) {SAFE\\transfer to B};\node[box2,right=of r4] (r5) {PLACE / RELEASE\\return HOME};\draw[arr] (r1)--(r2)--(r3)--(r4)--(r5);
 \end{tikzpicture}
-\caption{Real-machine action chain from device preparation to grasp, transfer, release and reset.}\label{fig:realflow}
+\caption{Real-machine frames paired with the action chain from device preparation to grasp, transfer, release and reset.}\label{fig:realflow}
 \end{figure}
 \section{Verification Results}
 \subsection{Five-cycle simulation record}
@@ -285,13 +287,7 @@ Figure~\ref{fig:simvideo} is a three-frame summary extracted from \code{simulati
 \end{figure}
 
 \subsection{Real-machine video}
-Figure~\ref{fig:realvideo} summarizes the supplied portrait MP4. It clearly shows the physical arm, gripper, table and target area during operation. It is appropriate evidence that the motion was transferred to hardware. Because the video is not accompanied by a timestamped five-cycle table or a separate safety checklist, the report does not convert the video alone into a numeric success rate.
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{real_sequence.jpg}
-\caption{Selected frames from the supplied real-machine demonstration video.}
-\label{fig:realvideo}
-\end{figure}
+Figure~\ref{fig:realflow} places representative hardware frames next to the action chain. The supplied portrait MP4 records the physical arm during approach, grasp, lift, transfer, release and reset. It is used as process evidence; the five-cycle numerical result remains supported by the simulation CSV records.
 
 \section{Discussion and Summary}
 \subsection{What the experiment demonstrates}
@@ -366,6 +362,10 @@ Commit & Content\\
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
 \end{document}
+
+
+
+
 
 
 
