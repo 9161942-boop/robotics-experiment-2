@@ -206,12 +206,12 @@ The node publishes a state string for the current phase, a result string for ter
 \subsection{Simulation implementation process}
 The simulation followed seven explicit steps: manual teaching and point adjustment came first, followed by automatic playback and acceptance checking.
 \begin{enumerate}
-\item \textbf{Build the Gazebo scene.} A \code{mecharm\_fixed\_pick\_sim} workspace was prepared under ROS 2 Humble and Gazebo Classic 11. The scene loaded the mechArm 270, parallel gripper, tabletop, target cylinder and placement area. Mass, inertia, collision bodies and friction coefficients were configured for the target so that contact, gripping, lifting and gravity release produced observable physical responses.
+\item \textbf{Build the Gazebo scene.} A \code{mecharm\_fixed\_pick\_sim} workspace was prepared under ROS 2 Humble and Gazebo Classic 11. The scene loaded the mechArm 270, parallel gripper, tabletop, target cylinder and placement area. Collision geometry was kept in the scene for visualization and clearance checks. During grasp and transport, the task used Gazebo's visual-attachment mode to keep the target with the gripper and make repeated demonstrations reproducible; the release routine then placed the target at the measured X/Y and $z=0.020$~m rather than treating the result as a pure friction-based grasp.
 \item \textbf{Compile and load the robot model.} The workspace was built with \code{colcon build --symlink-install} and the local overlay was sourced. The URDF/Xacro files, joint names, gripper joint and controller configuration were checked so that the manual control panel and automatic task node used the same joint interfaces.
 \item \textbf{Start Gazebo and teach poses manually.} One terminal launched Gazebo and the controllers with \code{ros2 launch mecharm\_fixed\_pick\_sim official\_assembled\_gazebo.launch.py gui:=true run\_task:=false contact\_grasp:=true}. A second terminal ran \code{ros2 run mecharm\_fixed\_pick\_sim manual\_control\_panel}. The panel provided six joint sliders, a gripper slider and a contact-pad force slider. Clicking ``Send current pose'' sent the selected joint state to Gazebo. The arm was moved step by step to the approach, pick, lift, transfer and release poses while the end-effector clearance and gripper orientation were observed. ``Reset object to A'' restarted a debugging trial.
-\item \textbf{Record waypoints and tune the parameters.} The panel recorded six joint angles, gripper position, contact-pad force and motion duration for each waypoint. The points \code{above\_pick}, \code{down\_pick}, \code{grasp\_object}, \code{lift\_object}, \code{move\_to\_place} and \code{release\_object} were added in execution order and saved to \code{manual\_animation.json}; the previous file was retained as \code{manual\_animation.json.bak}. Manual short cycles were used for parameter tuning: collision bodies, mass, inertia, friction and contact force were adjusted when the object was ejected or unstable; contact geometry and speed were adjusted when penetration or vibration occurred; B coordinates, release height, motion duration and gripper opening time were adjusted when the placement was offset.
-\item \textbf{Launch the automatic simulation.} After the manually taught poses were stable, \code{run\_contact\_grasp.sh} launched the five-cycle task. The script cleaned stale Gazebo processes and environment variables, selected a dedicated Gazebo master URI, waited for controller initialization and passed the confirmed action sequence to the task node.
-\item \textbf{Replay the sequence and check acceptance.} The automatic task node read the waypoints in \code{manual\_animation.json} and executed the \code{initial}, \code{above\_a}, \code{crab}, \code{pick}, \code{lift}, \code{release\_ready}, \code{release} and reset phases. Cosine interpolation generated 30~Hz joint commands. The program completed five cycles, checked the final X/Y/Z, XY error, height, joint limits, service responses and state transitions, and wrote the cycle number, phase, joint positions, gripper actions and checks to CSV. The terminal summary, two five-cycle CSV files, error log, checksums and simulation video were archived together.
+\item \textbf{Record waypoints and tune the parameters.} The panel recorded six joint angles, gripper position, contact-pad force and motion duration for each waypoint. The points \code{above\_pick}, \code{down\_pick}, \code{grasp\_object}, \code{lift\_object}, \code{move\_to\_place} and \code{release\_object} were saved to \code{manual\_animation.json}; the previous file was retained as \code{manual\_animation.json.bak}. This JSON is a teaching record used to inspect and reproduce manual trials; it is not consumed by the final automatic task. Short manual cycles were used to adjust collision geometry, visual-attachment/contact settings, approach clearance, B coordinates, release height, motion duration and gripper timing. Each change was checked by replaying the approach--grasp--lift--transfer--release motion and comparing the observed target pose.
+\item \textbf{Launch the automatic simulation.} After the manually taught poses were stable, \code{run\_contact\_grasp.sh} launched the five-cycle task. The script cleaned stale Gazebo processes and environment variables, selected a dedicated Gazebo master URI, waited for controller initialization and started the task node with \code{fixed\_point\_experiment.yaml}. The YAML file contains the final \code{poses} and \code{sequence} entries used for the recorded run.
+\item \textbf{Replay the configured sequence and check acceptance.} The automatic task node loaded \code{fixed\_point\_experiment.yaml} and executed \code{initial} $\rightarrow$ \code{above\_a} $\rightarrow$ \code{crab} $\rightarrow$ \code{pick} $\rightarrow$ \code{lift} $\rightarrow$ \code{initial\_2} $\rightarrow$ \code{release\_ready} $\rightarrow$ \code{release} $\rightarrow$ \code{initial}. Cosine interpolation generated 30~Hz joint commands. The program completed five cycles, checked the final X/Y/Z, XY error, height, joint limits, service responses and state transitions, and wrote the cycle number, phase, joint positions, gripper actions and checks to CSV. The terminal summary, two five-cycle CSV files, error log, checksums and simulation video were archived together.
 \end{enumerate}
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\small}, box/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center}, box2/.style={box,draw=Teal,fill=Teal!12}, arr/.style={-Latex,draw=Teal,line width=0.8pt}]
@@ -267,7 +267,7 @@ Cycle & $x$ (m) & $y$ (m) & $z$ (m) & XY error (m)\\
 The terminal row reports \code{success\_count=5}, \code{repeat\_count=5} and the rule “at least 4 successful runs out of 5.” The second CSV gives the same 5/5 result with a maximum XY error of 0.0005 m. The extra repeat value 6 in the CSV is the final summary row emitted after cycle 5; it is not an additional grasp attempt.
 
 \subsection{Static and abnormal-condition checks}
-The validation record reports successful Python syntax, Xacro, URDF and \code{colcon build} checks. Before motion, the task node validates each waypoint against the configured joint limits. The error log records the engineering issues encountered while converging to the final version: a simplified gripper collision model could eject the target, an oversized contact envelope could cause penetration, an insufficient startup delay could race controller activation, and a reused release waypoint could create overlapping placements. These cases were resolved by using the contact-mode model, reducing the contact geometry, delaying task start until controllers were ready, and checking the final Gazebo pose after release.
+The validation record reports successful Python syntax, Xacro, URDF and \code{colcon build} checks. Before motion, the task node validates each waypoint against the configured joint limits. The error log records the engineering issues encountered while converging to the final version: a simplified gripper collision model could eject the target, an oversized contact envelope could cause penetration, an insufficient startup delay could race controller activation, and a reused release waypoint could create overlapping placements. These cases were resolved by using the configured visual-attachment mode, reducing the collision geometry used for clearance checks, delaying task start until controllers were ready, and checking the final Gazebo pose after the scripted release placement.
 
 \section{Demonstration Evidence}
 \subsection{Simulation video}
@@ -312,7 +312,7 @@ The debugging history shows why final-pose verification matters. A node can repo
 \begin{table}[H]
 \centering\small
 \caption{Files included in the final submission directory}
-\begin{tabularx}{\textwidth}{>{\ttfamily\footnotesize}p{0.39\textwidth}X}
+\begin{tabularx}{\textwidth}{>{\ttfamily\scriptsize\raggedright\arraybackslash}p{0.46\textwidth}X}
 \toprule
 Path & Purpose\\
 \midrule
@@ -325,6 +325,8 @@ Path & Purpose\\
 \code{submission\_evidence/SHA256SUMS.txt} & Hashes for the evidence files\\
 \code{report/experiment2\_lab\_report.tex} & This report source\\
 \code{report/experiment2\_lab\_report.pdf} & Compiled report for submission\\
+\code{report/experiment2\_lab\_report\_zh\_preview.tex} & Chinese preview source\\
+\code{report/experiment2\_lab\_report\_zh\_preview.pdf} & Chinese preview PDF\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -351,10 +353,11 @@ Commit & Content\\
 \addcontentsline{toc}{section}{Declaration of Evidence Scope}
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
-\begin{center}
-\small\textbf{Figure 4.} GitHub commit history for the public Experiment 2 repository\\[2pt]
+\begin{figure}[H]
+\centering
 \includegraphics[width=0.55\textwidth]{github_commit_history_exp2.png}
+\caption{GitHub commit history for the public Experiment 2 repository.}
 \label{fig:github-history}
-\end{center}
+\end{figure}
 
 \end{document}
