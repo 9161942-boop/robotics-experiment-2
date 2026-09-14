@@ -203,6 +203,16 @@ ros2 launch mecharm_fixed_pick_sim fixed_point_experiment.launch.py \\
 \subsection{ROS 2 interfaces}
 The node publishes a state string for the current phase, a result string for terminal status, joint commands for the arm and gripper, and visualization markers for the configured points. The Launch file exposes parameters for GUI mode, task start, repeat count, exit behavior, startup delay and log directory. These parameters allow simulation and hardware runs to share the same control logic while changing only the environment-specific values.
 
+\subsection{Simulation implementation process}
+The simulation was implemented as a complete ROS 2 workflow rather than as an isolated Gazebo scene. First, the workspace was sourced and compiled with \code{colcon build --symlink-install}; the local overlay was then sourced so that the Launch system could find both \code{mycobot\_description} and \code{mecharm\_fixed\_pick\_sim}. Second, \code{run\_contact\_grasp.sh} started Gazebo with the contact-mode world, robot description, controllers, robot-state publisher and task node. The script also cleared stale Gazebo environment variables, selected a dedicated master URI and delayed the task until controller activation had completed.
+
+After the scene became stable, the task node executed the same state machine for five repeats. It published interpolated joint commands at 30~Hz, opened the gripper before approaching A, closed it at the pick phase, attached the target cylinder for the simulated grasp, lifted it through the safe height, moved above B, released it vertically and checked the final pose. Each transition was written to CSV with the repeat number, phase, joint positions and status. The simulation process was therefore: build the workspace, launch one controlled Gazebo session, execute the five-cycle state machine, inspect \code{cycle\_passed} rows, and archive the CSV, terminal summary and video.
+
+\subsection{Real-machine implementation process}
+The real-machine demonstration reused the motion logic and the semantic phase names established in simulation. Before motion, the physical mechArm 270 was placed beside the prepared tabletop, the gripper was checked in its open state, and the arm was returned to a known home pose. The target and destination were then arranged to match the configured A/B relationship. A short no-load or low-speed check was used to confirm that the arm cleared the table and that the gripper direction was correct before attempting the transfer.
+
+The hardware transfer changes the device-specific communication and controller parameters, while preserving the taught joint waypoints, safe height, gripper commands and release order. During the demonstration the arm approached the target, closed the gripper, lifted and translated to the destination, opened the gripper and returned toward its initial pose. The supplied real-machine MP4 records this physical sequence and is included as visual evidence. Since the archive has no timestamped hardware CSV or separate safety checklist, the video is used to document implementation and operation, while the quantitative five-cycle result in this report remains the verified simulation result.
+
 \section{Verification Results}
 \subsection{Five-cycle simulation record}
 The two CSV files in the v2 package are distinct SHA-256-verified records. Each contains 116 rows: five complete cycles followed by a terminal summary row. The five \code{cycle\_passed} rows in the recorded run have the following final positions and XY errors.
@@ -314,7 +324,7 @@ The simulation results in this report are quoted from the supplied final v2 arch
 
 \begin{center}
 \small\textbf{Figure 4.} GitHub commit history for the public Experiment 2 repository\\[2pt]
-\includegraphics[width=0.32\textwidth]{github_commit_history_exp2.png}
+\includegraphics[width=0.55\textwidth]{github_commit_history_exp2.png}
 \label{fig:github-history}
 \end{center}
 
