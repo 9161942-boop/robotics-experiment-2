@@ -37,9 +37,9 @@
 \titleformat{\subsection}{\normalsize\bfseries\color{Blue}}{\thesubsection}{0.6em}{}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small Robotics Integration Group Project}
+\fancyhead[L]{\small Group 17 · Robotics Integration Group Project}
 \fancyhead[R]{\small Experiment 2: Fixed-point Pick-and-place}
-\fancyfoot[C]{\small Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[C]{\small Page \thepage}
 \renewcommand{\headrulewidth}{0.35pt}
 \renewcommand{\footrulewidth}{0.35pt}
 \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,columns=fullflexible,keepspaces=true,backgroundcolor=\color{SoftGray},frame=single,rulecolor=\color{Blue!35},xleftmargin=0.8em,xrightmargin=0.8em,aboveskip=0.5em,belowskip=0.6em}
@@ -63,8 +63,10 @@
 \vspace{11mm}
 \rule{0.72\textwidth}{1pt}\par\vspace{5mm}
 {\large Laboratory Report}\par\vspace{8mm}
-\begin{tabular}{>{\bfseries\color{Navy}}rl}
+\begin{tabular}{>{\bfseries\color{Navy}}p{0.23\textwidth}p{0.58\textwidth}}
 Course & Robotics Integration Group Project I\\
+Group & Group 17\\
+Members & Yang Muqing; Lan Songyu; Zhang Kairui; Zhao Hang\\
 Platform & ROS 2 Humble + Gazebo + mechArm 270\\
 Evidence version & experiment2\_submission\_final\_20260913\_v2\\
 Repository & \url{https://github.com/9161942-boop/robotics-experiment-2}
@@ -312,5 +314,11 @@ Commit & Content\\
 \section*{Declaration of Evidence Scope}
 \addcontentsline{toc}{section}{Declaration of Evidence Scope}
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
+
+\begin{center}
+\small\textbf{Figure 4.} GitHub commit history for the public Experiment 2 repository\\[2pt]
+\includegraphics[width=0.32\textwidth]{github_commit_history_exp2.png}
+\label{fig:github-history}
+\end{center}
 
 \end{document}
