@@ -91,11 +91,10 @@ ros2 launch mecharm_fixed_pick_sim fixed_point_experiment.launch.py \\
 \end{enumerate}
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=0.35cm,every node/.style={font=\small},s/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center},t/.style={s,draw=Teal,fill=Teal!12},a/.style={-Latex,draw=Teal,line width=0.8pt}]
-\node[s](s1){Gazebo 场景\\与控制器};\node[s,right=of s1](s2){手动控制面板\\逐步调姿态};\node[s,right=of s2](s3){记录航点\\manual\_animation.json};
-\node[t,below=of s3](s4){手动小循环\\检查抓取与释放};\node[t,left=of s4](s5){自动任务节点\\读取序列};\node[t,left=of s5](s6){CSV、日志\\视频与摘要};
-\draw[a](s1)--(s2)--(s3)--(s4)--(s5)--(s6);
+\node[s](s1){手动控制台 / JSON\\示教记录};\node[s,right=of s1](s2){固化最终参数\\fixed\_point\_experiment.yaml};\node[s,right=of s2](s3){自动任务节点\\读取 YAML 序列};\node[t,right=of s3](s4){CSV、日志、视频\\与摘要};
+\draw[a](s1)--(s2)--(s3)--(s4);
 \end{tikzpicture}
-\caption{仿真阶段的手动示教、自动回放与证据生成流程。}\label{fig:simflowzh}
+\caption{从手动示教记录到 YAML 配置自动任务及证据生成的仿真流程。}\label{fig:simflowzh}
 \end{figure}
 \begin{figure}[H]\centering
 \begin{minipage}{0.43\textwidth}\centering\includegraphics[width=\textwidth]{ppt_action_sequence2.png}\end{minipage}\hfill
@@ -150,6 +149,6 @@ v2 材料中的两份 CSV 经过 SHA-256 校验且彼此独立。每份包含 11
 \begin{table}[H]\centering\small\caption{最终提交目录中的主要文件}\begin{tabularx}{\textwidth}{>{\ttfamily\scriptsize\raggedright\arraybackslash}p{0.46\textwidth}X}\toprule 路径 & 用途\\\midrule \code{src/mecharm\_fixed\_pick\_sim/} & ROS 2 任务节点、Launch、YAML、场景与 URDF/Xacro\\\code{src/mycobot\_description/} & 机器人网格与夹爪资源\\\code{run\_contact\_grasp.sh} & 一条命令启动五周期仿真\\\code{submission\_evidence/results/} & 两份独立五周期 CSV\\\code{submission\_evidence/docs/ERROR\_LOG.md} & 异常情况与修复记录\\\code{submission\_evidence/videos/} & 仿真 WebM 与实机 MP4\\\code{submission\_evidence/SHA256SUMS.txt} & 证据文件校验和\\\code{report/experiment2\_lab\_report.tex} & 英文报告源文件\\\code{report/experiment2\_lab\_report.pdf} & 英文提交 PDF\\\code{report/experiment2\_lab\_report\_zh\_preview.tex} & 中文预览源文件\\\code{report/experiment2\_lab\_report\_zh\_preview.pdf} & 中文预览 PDF\\\bottomrule\end{tabularx}\end{table}
 \subsection{GitHub 提交记录}
 实验二材料维护在公开仓库\url{https://github.com/9161942-boop/robotics-experiment-2}中，代码、证据、报告和视频按阶段提交：\begin{table}[H]\centering\small\caption{实验二分阶段 GitHub 提交}\begin{tabular}{ll}\toprule 提交 & 内容\\\midrule \code{b21bb71} & ROS 2 程序、Launch 文件与仿真配置\\\code{330ac6a} & 五周期 CSV、错误日志与校验和\\\code{dc85c53} & 英文 LaTeX 报告、PDF 与插图\\\code{b4f67d2} & 仿真和实机演示视频\\\bottomrule\end{tabular}\end{table}
+\begin{figure}[H]\centering\includegraphics[width=0.36\textwidth]{github_commit_history_exp2.png}\caption{公开实验二仓库的 GitHub 提交历史。}\label{fig:github-history-zh}\end{figure}
 \section*{证据范围说明}\addcontentsline{toc}{section}{证据范围说明}本报告中的仿真结果引用 final v2 压缩包及其中的 CSV、验证记录，编写报告阶段未重新运行仿真。两段视频为用户提供的演示文件，报告依据视频画面说明仿真和实机动作过程。五周期仿真次数由 CSV 支持，实机部分围绕 MP4 中呈现的实体操作展开。
-\begin{figure}[H]\centering\includegraphics[width=0.55\textwidth]{github_commit_history_exp2.png}\caption{公开实验二仓库的 GitHub 提交历史。}\label{fig:github-history-zh}\end{figure}
 \end{document}

@@ -215,10 +215,9 @@ The simulation followed seven explicit steps: manual teaching and point adjustme
 \end{enumerate}
 \begin{figure}[H]\centering
 \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\small}, box/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center}, box2/.style={box,draw=Teal,fill=Teal!12}, arr/.style={-Latex,draw=Teal,line width=0.8pt}]
-\node[box] (s1) {Gazebo scene\\and controllers};\node[box,right=of s1] (s2) {Manual control panel\\teach poses};\node[box,right=of s2] (s3) {Record waypoints\\manual\_animation.json};
-\node[box2,below=of s3] (s4) {Manual short cycle\\tune grasp/release};\node[box2,left=of s4] (s5) {Automatic task node\\replay sequence};\node[box2,left=of s5] (s6) {CSV, logs,\\video and summary};\draw[arr] (s1)--(s2)--(s3)--(s4)--(s5)--(s6);
+\node[box] (s1) {Manual control panel / JSON\\teaching record};\node[box,right=of s1] (s2) {Fix final parameters\\fixed\_point\_experiment.yaml};\node[box,right=of s2] (s3) {Automatic task node\\read YAML sequence};\node[box2,right=of s3] (s4) {CSV, logs, video\\and summary};\draw[arr] (s1)--(s2)--(s3)--(s4);
 \end{tikzpicture}
-\caption{Simulation flow from manual teaching to automatic replay and evidence generation.}\label{fig:simflow}
+\caption{Simulation flow from manual teaching records to the YAML-configured automatic task and evidence generation.}\label{fig:simflow}
 \end{figure}
 \begin{figure}[H]\centering
 \begin{minipage}{0.43\textwidth}\centering\includegraphics[width=\textwidth]{ppt_action_sequence2.png}\end{minipage}\hfill
@@ -349,15 +348,15 @@ Commit & Content\\
 \end{tabular}
 \end{table}
 
-\section*{Declaration of Evidence Scope}
-\addcontentsline{toc}{section}{Declaration of Evidence Scope}
-The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{github_commit_history_exp2.png}
+\includegraphics[width=0.36\textwidth]{github_commit_history_exp2.png}
 \caption{GitHub commit history for the public Experiment 2 repository.}
 \label{fig:github-history}
 \end{figure}
+
+\section*{Declaration of Evidence Scope}
+\addcontentsline{toc}{section}{Declaration of Evidence Scope}
+The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
 \end{document}
