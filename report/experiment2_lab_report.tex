@@ -204,7 +204,7 @@ ros2 launch mecharm_fixed_pick_sim fixed_point_experiment.launch.py \\
 The node publishes a state string for the current phase, a result string for terminal status, joint commands for the arm and gripper, and visualization markers for the configured points. The Launch file exposes parameters for GUI mode, task start, repeat count, exit behavior, startup delay and log directory. These parameters allow simulation and hardware runs to share the same control logic while changing only the environment-specific values.
 
 \subsection{Simulation implementation process}
-The simulation followed six explicit steps: manual teaching and point adjustment came first, followed by automatic playback and acceptance checking.
+The simulation followed seven explicit steps: manual teaching and point adjustment came first, followed by automatic playback and acceptance checking.
 \begin{enumerate}
 \item \textbf{Build the Gazebo scene.} A \code{mecharm\_fixed\_pick\_sim} workspace was prepared under ROS 2 Humble and Gazebo Classic 11. The scene loaded the mechArm 270, parallel gripper, tabletop, target cylinder and placement area. Mass, inertia, collision bodies and friction coefficients were configured for the target so that contact, gripping, lifting and gravity release produced observable physical responses.
 \item \textbf{Compile and load the robot model.} The workspace was built with \code{colcon build --symlink-install} and the local overlay was sourced. The URDF/Xacro files, joint names, gripper joint and controller configuration were checked so that the manual control panel and automatic task node used the same joint interfaces.
@@ -220,7 +220,11 @@ The simulation followed six explicit steps: manual teaching and point adjustment
 \end{tikzpicture}
 \caption{Simulation flow from manual teaching to automatic replay and evidence generation.}\label{fig:simflow}
 \end{figure}
-\begin{figure}[H]\centering\includegraphics[width=0.82\textwidth]{sim_sequence.jpg}\caption{Key simulation frames: approach, grasp and release/reset.}\label{fig:simprocess}\end{figure}
+\begin{figure}[H]\centering
+\begin{minipage}{0.43\textwidth}\centering\includegraphics[width=\textwidth]{ppt_action_sequence2.png}\end{minipage}\hfill
+\begin{minipage}{0.53\textwidth}\centering\includegraphics[width=\textwidth]{ppt_manual_panel.png}\end{minipage}
+\caption{Simulation debugging artifacts: the waypoint sequence and manual control panel.}\label{fig:simmanual}
+\end{figure}
 
 \subsection{Real-machine implementation process}
 The real-machine demonstration followed six steps that corresponded to the simulation phases.
@@ -238,8 +242,6 @@ The real-machine demonstration followed six steps that corresponded to the simul
 \end{tikzpicture}
 \caption{Real-machine action chain from device preparation to grasp, transfer, release and reset.}\label{fig:realflow}
 \end{figure}
-\begin{figure}[H]\centering\includegraphics[width=0.62\textwidth]{real_sequence.jpg}\caption{Key real-machine frames: approach, grasp and placement.}\label{fig:realprocess}\end{figure}
-
 \section{Verification Results}
 \subsection{Five-cycle simulation record}
 The two CSV files in the v2 package are distinct SHA-256-verified records. Each contains 116 rows: five complete cycles followed by a terminal summary row. The five \code{cycle\_passed} rows in the recorded run have the following final positions and XY errors.
