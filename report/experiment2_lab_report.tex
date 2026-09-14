@@ -220,7 +220,7 @@ The simulation followed seven explicit steps: manual teaching and point adjustme
 \item \textbf{Replay the configured sequence and check acceptance.} The automatic task node loaded \code{fixed\_point\_experiment.yaml} and executed \code{initial} $\rightarrow$ \code{above\_a} $\rightarrow$ \code{crab} $\rightarrow$ \code{pick} $\rightarrow$ \code{lift} $\rightarrow$ \code{initial\_2} $\rightarrow$ \code{release\_ready} $\rightarrow$ \code{release} $\rightarrow$ \code{initial}. Cosine interpolation generated 30~Hz joint commands. The program completed five cycles, checked the final X/Y/Z, XY error, height, joint limits, service responses and state transitions, and wrote the cycle number, phase, joint positions, gripper actions and checks to CSV. The terminal summary, two five-cycle CSV files, error log, checksums and simulation video were archived together.
 \end{enumerate}
 \begin{figure}[H]\centering
-\includegraphics[width=0.82\textwidth]{real_sequence.jpg}\par\vspace{2mm}
+
 \begin{tikzpicture}[node distance=0.35cm, every node/.style={font=\small}, box/.style={draw=Navy,rounded corners=2pt,fill=Sky,minimum width=2.65cm,minimum height=0.62cm,align=center}, box2/.style={box,draw=Teal,fill=Teal!12}, arr/.style={-Latex,draw=Teal,line width=0.8pt}]
 \node[box] (s1) {Manual control panel / JSON\\teaching record};\node[box,right=of s1] (s2) {Fix final parameters\\fixed\_point\_experiment.yaml};\node[box,right=of s2] (s3) {Automatic task node\\read YAML sequence};\node[box2,right=of s3] (s4) {CSV, logs, video\\and summary};\draw[arr] (s1)--(s2)--(s3)--(s4);
 \end{tikzpicture}
@@ -362,6 +362,7 @@ Commit & Content\\
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
 \end{document}
+
 
 
 
