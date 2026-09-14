@@ -51,38 +51,40 @@
 \begin{titlepage}
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
-\fill[SoftGray] (current page.north west) rectangle (current page.south east);
+\fill[white] (current page.north west) rectangle (current page.south east);
 \fill[Navy] (current page.north west) rectangle ([yshift=-7mm]current page.north east);
 \fill[Teal] ([yshift=-7mm]current page.north west) rectangle ([yshift=-10mm]current page.north east);
+\fill[Navy] (current page.south west) rectangle ([yshift=18mm]current page.south east);
 \node[anchor=north west,xshift=18mm,yshift=-17mm,color=Navy,font=\sffamily\bfseries\small] at (current page.north west) {ROBOTICS INTEGRATION GROUP PROJECT};
 \node[anchor=north east,xshift=-18mm,yshift=-17mm,color=Blue,font=\sffamily\bfseries\small] at (current page.north east) {GROUP 17};
+\node[anchor=north east,xshift=-17mm,yshift=-42mm,color=Sky,font=\sffamily\bfseries] at (current page.north east) {\fontsize{120}{120}\selectfont 02};
+\node[anchor=south west,xshift=18mm,yshift=6mm,color=white,font=\sffamily\small] at (current page.south west) {ROS 2 HUMBLE  ·  GAZEBO  ·  mechARM 270};
+\node[anchor=south east,xshift=-18mm,yshift=6mm,color=white,font=\sffamily\small] at (current page.south east) {SEPTEMBER 2026};
 \end{tikzpicture}
-\vspace*{24mm}
+\vspace*{31mm}
 \begin{center}
-{\color{Navy}\sffamily\bfseries\fontsize{38}{44}\selectfont Experiment 2}\par
-\vspace{3mm}
-{\color{Blue}\sffamily\fontsize{20}{25}\selectfont Fixed-point Pick-and-place with a mechArm 270}\par
+{\color{Teal}\sffamily\bfseries\small EXPERIMENT REPORT SERIES}\par
+\vspace{8mm}
+{\color{Navy}\sffamily\bfseries\fontsize{40}{46}\selectfont Experiment 2}\par
+\vspace{4mm}
+{\color{Blue}\sffamily\fontsize{20}{25}\selectfont Fixed-point Pick-and-place}\par
+{\color{Ink}\sffamily\large with a mechArm 270}\par
+\vspace{8mm}
+{\color{Teal}\rule{0.12\textwidth}{2pt}\hspace{6pt}\rule{0.48\textwidth}{0.6pt}\hspace{6pt}\rule{0.12\textwidth}{2pt}}\par
 \vspace{5mm}
-{\color{Ink}\sffamily\large Laboratory report  /  ROS 2 Humble  /  Gazebo}\par
+{\color{Ink}\sffamily\large Laboratory report}\par
 \end{center}
-\vspace{8mm}
-\begin{center}
-\fcolorbox{Blue!35}{white}{\includegraphics[width=0.88\textwidth]{figures/sim_sequence.jpg}}\par
-\vspace{2mm}
-{\color{Ink}\sffamily\footnotesize Simulation action sequence used for fixed-point pick-and-place verification}\par
-\end{center}
-\vspace{8mm}
+\vspace{18mm}
 \noindent\begin{center}
-\colorbox{white}{\parbox{0.88\textwidth}{\vspace{4mm}
-\begin{tabular}{>{\bfseries\color{Navy}\sffamily}p{0.20\textwidth}p{0.68\textwidth}}
-Course & Robotics Integration Group Project I\\
-Members & Yang Muqing; Lan Songyu; Zhang Kairui; Zhao Hang\\
-Evidence & experiment2\_submission\_final\_20260913\_v2\\
+\begin{tabular}{>{\bfseries\color{Navy}\sffamily}p{0.22\textwidth}p{0.58\textwidth}}
+Course & Robotics Integration Group Project I\\[2mm]
+Members & Yang Muqing; Lan Songyu; Zhang Kairui; Zhao Hang\\[2mm]
+Evidence & experiment2\_submission\_final\_20260913\_v2\\[2mm]
 Repository & \url{github.com/9161942-boop/robotics-experiment-2}
-\end{tabular}\vspace{4mm}}}\par
+\end{tabular}
 \end{center}
 \vfill
-\noindent\begin{center}{\color{Blue}\sffamily\small Simulation verification  ·  ROS 2 control  ·  Real-arm demonstration}\end{center}
+\begin{center}{\color{Blue}\sffamily\small Simulation verification  ·  ROS 2 control  ·  Real-arm demonstration}\end{center}
 \end{titlepage}
 
 \section*{Abstract}
@@ -364,6 +366,7 @@ Commit & Content\\
 The simulation results in this report are quoted from the supplied final v2 archive and its CSV/validation records; no new simulation was run while preparing this report. The two videos are the user-supplied demonstration files and were inspected read-only. Statements about the exact five-cycle simulation count are supported by the CSV files. Statements about the real-machine demonstration are limited to what is visible in the supplied MP4 unless a separate hardware result table is added later.
 
 \end{document}
+
 
 
 
