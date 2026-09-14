@@ -19,38 +19,50 @@
 \begin{titlepage}
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
-\fill[Navy] (current page.north west) rectangle ([yshift=-27mm]current page.north east);
-\fill[Teal] ([yshift=-27mm]current page.north west) rectangle ([yshift=-30mm]current page.north east);
-\fill[Sky] ([xshift=-24mm]current page.north east) rectangle ([xshift=-15mm,yshift=-30mm]current page.north east);
-\node[anchor=north west,xshift=22mm,yshift=-10mm,color=white,font=\sffamily\bfseries\small] at (current page.north west) {机器人学集成小组项目};
-\node[anchor=north east,xshift=-30mm,yshift=-10mm,color=white,font=\sffamily\small] at (current page.north east) {第17组};
+\fill[SoftGray] (current page.north west) rectangle (current page.south east);
+\fill[Navy] (current page.north west) rectangle ([xshift=0.36\paperwidth]current page.south west);
+\fill[Teal] ([xshift=0.36\paperwidth]current page.north west) rectangle ([xshift=0.382\paperwidth]current page.south west);
+\fill[Blue] ([xshift=0.382\paperwidth]current page.north west) rectangle ([xshift=0.388\paperwidth]current page.south west);
+\node[anchor=north west,xshift=16mm,yshift=-18mm,color=white,font=\sffamily\bfseries\small] at (current page.north west) {机器人集成};
+\node[anchor=north west,xshift=16mm,yshift=-25mm,color=white,font=\sffamily\small] at (current page.north west) {小组项目};
+\node[anchor=south west,xshift=16mm,yshift=18mm,color=white,font=\sffamily\bfseries\small] at (current page.south west) {第 17 组  /  2026};
 \end{tikzpicture}
-\vspace*{13mm}
-\begin{center}
-{\color{Teal}\sffamily\bfseries\small 实验报告系列 \textbar\ ROS 2 + GAZEBO}\par
+\vspace*{18mm}
+\noindent\begin{minipage}[t][0.83\textheight][t]{0.31\textwidth}
+\color{white}\sffamily
+{\color{Sky}\fontsize{11}{13}\selectfont\bfseries 实验 02}\par
 \vspace{9mm}
-{\color{Navy}\fontsize{29}{34}\selectfont\sffamily\bfseries 实验二}\par
-\vspace{3mm}
-{\color{Blue}\fontsize{19}{24}\selectfont\sffamily 机械臂定点抓取与放置}\par
-\vspace{6mm}
-{\color{Teal}\rule{0.16\textwidth}{2pt}\hspace{5pt}\rule{0.52\textwidth}{0.6pt}\hspace{5pt}\rule{0.16\textwidth}{2pt}}\par
+{\fontsize{25}{29}\selectfont\bfseries 机械臂定点\par 抓取与放置}\par
 \vspace{5mm}
-{\color{Ink}\large\sffamily 实验报告}\par
-\vspace{8mm}
-\colorbox{Sky}{\parbox{0.84\textwidth}{\vspace{4mm}
-\begin{tabular}{>{\bfseries\color{Navy}\sffamily}p{0.24\textwidth}p{0.58\textwidth}}
-课程 & 机器人学集成小组项目 I\\
-小组 & 第17组\\
+{\color{Sky}\fontsize{13}{17}\selectfont mechArm 270}\par
+\vspace{10mm}
+\color{white}\rule{0.76\linewidth}{1.2pt}\par
+\vspace{5mm}
+{\fontsize{10}{14}\selectfont 实验报告}\par
+\vfill
+{\small\color{white}ROS 2 Humble\par Gazebo 仿真\par 实机演示}\par
+\end{minipage}\hfill
+\begin{minipage}[t][0.83\textheight][t]{0.58\textwidth}
+\raggedright
+{\color{Teal}\sffamily\bfseries\small 实验报告  |  ROS 2 + GAZEBO}\par
+\vspace{4mm}
+{\color{Navy}\sffamily\bfseries\large 六关节机械臂的可重复操作流程}\par
+\vspace{5mm}
+\fcolorbox{Blue!35}{white}{\parbox{0.96\linewidth}{\centering\includegraphics[width=0.96\linewidth]{figures/manual_control_console.png}}}\par
+\vspace{3mm}
+{\color{Ink}\footnotesize 手动示教控制台与 Gazebo 场景，用于确定定点并验证动作序列。}\par
+\vspace{7mm}
+\colorbox{white}{\parbox{0.96\linewidth}{\vspace{3mm}
+\begin{tabular}{>{\bfseries\color{Navy}\sffamily}p{0.29\linewidth}p{0.63\linewidth}}
+课程 & 机器人集成小组项目 I\\
+小组 & 第 17 组\\
 组员 & 杨牧青；兰松语；张凯睿；赵航\\
-平台 & ROS 2 Humble + Gazebo + mechArm 270\\
 材料版本 & experiment2\_submission\_final\_20260913\_v2\\
 仓库 & \url{github.com/9161942-boop/robotics-experiment-2}
-\end{tabular}\vspace{4mm}}}\par
+\end{tabular}\vspace{3mm}}}\par
 \vfill
-\colorbox{SoftGray}{\parbox{0.78\textwidth}{\small\color{Ink}\textbf{内容概述。}本报告记录一个定点抓取与放置实验：机械臂从已知的抓取点 A 接近目标，完成夹持后抬升到安全高度，移动至放置点 B 释放目标，最后返回初始位姿。报告说明控制原理、ROS 2 实现、仿真验证结果和实机演示证据。}}\par
-\vfill
-{\color{Navy}\sffamily\bfseries 2026 年 9 月}\par
-\end{center}
+{\color{Blue}\sffamily\bfseries 2026 年 9 月}\par
+\end{minipage}
 \end{titlepage}
 \section*{摘要}\addcontentsline{toc}{section}{摘要}
 本实验面向六关节 mechArm 270 机械臂，完成了一个可重复的定点抓取与放置任务。系统采用 ROS 2 工作空间组织，通过一个 Launch 文件同时启动机器人描述、Gazebo 场景、控制器、状态发布、可视化节点和任务节点。预设动作序列使机械臂从 home 位姿运动到抓取点 A，闭合夹爪并抬起圆柱目标，随后移动到放置点 B，通过短距离竖直下降释放目标，最后返回 home。任务节点在关节空间中使用余弦插值，在每个阶段发布状态和结果信息，检查关节限位，并将状态转移记录到 CSV。最终 v2 材料中的两份独立五周期记录均包含 5 条\code{cycle\_passed}，终端摘要为\code{status: passed}且\code{success\_count=5}。仿真视频记录 Gazebo 中的完整动作，实机视频记录实体机械臂的操作过程；两类材料共同构成实验取证。\par
@@ -182,4 +194,5 @@ v2 材料中的两份 CSV 经过 SHA-256 校验且彼此独立。每份包含 11
 \begin{figure}[H]\centering\includegraphics[width=0.36\textwidth]{github_commit_history_exp2.png}\caption{公开实验二仓库的 GitHub 提交历史。}\label{fig:github-history-zh}\end{figure}
 \section*{证据范围说明}\addcontentsline{toc}{section}{证据范围说明}本报告中的仿真结果引用 final v2 压缩包及其中的 CSV、验证记录，编写报告阶段未重新运行仿真。两段视频为用户提供的演示文件，报告依据视频画面说明仿真和实机动作过程。五周期仿真次数由 CSV 支持，实机部分围绕 MP4 中呈现的实体操作展开。
 \end{document}
+
 
